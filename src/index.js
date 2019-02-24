@@ -255,10 +255,10 @@ module.exports = function (config) {
           json[key] = data[key];
         }
       }
-
+      var teamId = data.team_id;
       var stringifiedJson = JSON.stringify(json);
-      save(SQL`INSERT into `.append(tableName).append(SQL` (id, json)`)
-          .append(SQL`VALUES (${data.id}, ${stringifiedJson})`)
+      save(SQL`INSERT into `.append(tableName).append(SQL` (id, team_id, json)`)
+          .append(SQL`VALUES (${data.id}, ${teamId}, ${stringifiedJson})`)
           .append(SQL`ON DUPLICATE KEY UPDATE json=${stringifiedJson}`), callback);
     };
   };
